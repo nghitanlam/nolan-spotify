@@ -40,6 +40,19 @@ app.use("/api/songs", songRoutes);
 app.use("/api/albums", albumRoutes);
 app.use("/api/stats", statRoutes);
 
+// [] error handler middleware
+app.use((error, req, res, next) => {
+  res
+    .status(500)
+    .json({
+      success: false,
+      message:
+        process.env.NODE_ENV === "production"
+          ? "Internal Server Error"
+          : error.message,
+    });
+});
+
 app.listen(PORT, () => {
   console.log(`🌐 Server is running on port 🚀::${PORT}`);
   connectDB();
