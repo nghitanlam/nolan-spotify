@@ -15,6 +15,10 @@ const uploadToCloudinary = async (file) => {
   }
 };
 
+export const checkAdmin = async (req, res) => {
+  res.status(200).json({ admin: true });
+};
+
 export const createSong = async (req, res, next) => {
   try {
     if (!req.files || !req.files.audioFile || !req.files.imageFile) {
