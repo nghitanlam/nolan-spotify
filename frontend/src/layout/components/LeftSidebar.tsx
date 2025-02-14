@@ -1,13 +1,13 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { SignedIn } from "@clerk/clerk-react";
 import { HomeIcon, Library, MessageCircle } from "lucide-react";
 
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { SignedIn } from "@clerk/clerk-react";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import PlaylistSkeleton from "@/components/skeletons/PlaylistSkeleton";
 import { useMusicStore } from "@/stores/useMusicStore";
-import { useEffect } from "react";
+import { cn } from "@/lib/utils";
+import PlaylistSkeleton from "@/components/skeletons/PlaylistSkeleton";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { buttonVariants } from "@/components/ui/button";
 
 const LeftSidebar = () => {
   const { albums, fetchAlbums, isLoading } = useMusicStore();
