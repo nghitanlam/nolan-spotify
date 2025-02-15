@@ -1,11 +1,10 @@
+import { useEffect } from "react";
+import { useUser } from "@clerk/clerk-react";
 import { HeadphonesIcon, Music, Users } from "lucide-react";
 
 import { useChatStore } from "@/stores/useChatStore";
-import { useEffect } from "react";
-import { useUser } from "@clerk/clerk-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Avatar } from "@/components/ui/avatar";
-import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const FriendsActivity = () => {
   const { users, isLoading, error, fetchUsers } = useChatStore();
