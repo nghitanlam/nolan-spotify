@@ -4,6 +4,7 @@ import path from "path";
 import cors from "cors";
 import { clerkMiddleware } from "@clerk/express";
 import fileUpload from "express-fileupload";
+import { createServer } from "http";
 
 import userRoutes from "./routes/user.route.js";
 import adminRoutes from "./routes/admin.route.js";
@@ -12,12 +13,16 @@ import songRoutes from "./routes/song.route.js";
 import albumRoutes from "./routes/album.route.js";
 import statRoutes from "./routes/stat.route.js";
 import { connectDB } from "./lib/db.js";
+import { initializeSocket } from "./lib/socket.js";
 
 dotenv.config();
 
 const app = express();
 const __dirname = path.resolve();
 const PORT = process.env.PORT;
+
+const httpServer = createServer(app);
+initializeSocket(httpServer);
 
 app.use(express.json());
 app.use(cors());
@@ -32,7 +37,7 @@ app.use(
     limits: {
       fileSize: 10 * 1024 * 1024, // Max 10MB
     },
-  })
+  }),
 );
 
 app.use("/api/users", userRoutes);
@@ -53,7 +58,7 @@ app.use((error, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   console.log(`🌐 Server is running on port 🚀::${PORT}`);
   connectDB();
 });
