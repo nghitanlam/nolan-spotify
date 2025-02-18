@@ -6,6 +6,6 @@ import { getAllUsers, getMessages } from "../controllers/user.controller.js";
 const router = express.Router();
 
 router.get("/", protectRoute, getAllUsers);
-router.get("/message/:userId", protectRoute, getMessages);
+router.get("/messages/:userId", protectRoute, getMessages);
 
 export default router;
